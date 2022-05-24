@@ -57,7 +57,7 @@ plugins:
 
 author:
   name   : "Erik Andersen"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/saphira.jpg"
   bio    : "I am a first year Phd student in economics at the University of Washington."
   links:
     - label: "GitHub"
