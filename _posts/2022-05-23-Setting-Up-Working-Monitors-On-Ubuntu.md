@@ -16,11 +16,11 @@ output:
 
 
 
-This blog is going to focus on the important issues. You know, the real down to earth stuff that affects everyone. And not just first world issues either, we will practice inclusiveness. To demonstrate my commitment, this first post will be all about making sure your dual monitor setup runs smoothly when you switch to linux. 
+This blog is going to focus on the important issues. You know, the real down to earth stuff that affects everyone. Not just first world issues either, we will practice inclusiveness. To demonstrate my commitment, this first post will be all about making sure your dual monitor setup runs smoothly when you switch to linux. 
 
-If you're anything like me (and I assume you are), you took a machine learning class in college, and realized windows doesn't let you run code in parallel as UNIX based systems, so you *very* sneakily convinced you dad you needed a new 500 GB ssd to dual boot linux on. Then as soon as you booted it up, the OS decided that your secondary monitor should really be the main one: *very* frustrating. Power user that you are (you swapped to linux after all), you used all of your skills built up from years of using windows, booted up the [Nvidia menu](https://forum.manjaro.org/t/how-do-you-use-nvidia-x-server-settings-exactly/96678), toggled the switch that swaps your default monitor, then calmly went about your business. Now your monitors were working perfectly, and you were all ready to be a new linux hacker until... you restarted your computer and it swapped back. This was when you first learned that in linux many settings aren't persistent like they are on windows, and *gasp* this is a [feature](https://stackoverflow.com/questions/15977171/why-when-i-restart-the-terminal-the-environment-variables-are-restarted){target="_blank"}!
+If you're anything like me (and I assume you are), you took a machine learning class in college, realized windows doesn't let you run code in parallel as easiliy as UNIX based systems, so you *very* sneakily convinced you dad you needed a new 500 GB ssd to dual boot linux on. Then as soon as you booted it up, the OS decided that your secondary monitor should really be the main one: *very* frustrating. Power user that you are (you swapped to linux after all), you used all of your skills built up from years of using windows, booted up the [Nvidia menu](https://forum.manjaro.org/t/how-do-you-use-nvidia-x-server-settings-exactly/96678), toggled the switch that swaps your default monitor, then calmly went about your business. Now your monitors were working perfectly, and you were all ready to be a new linux hacker until... you restarted your computer and it swapped back. This was when you first learned that in linux many settings aren't persistent like they are on windows, and *gasp* this is a [feature](https://stackoverflow.com/questions/15977171/why-when-i-restart-the-terminal-the-environment-variables-are-restarted)!
 
-I have two goals for this post. Nominally, it is about how to use Nvidia settings correctly on Ubuntu 20.04 and above, but the more important message I hope to convey is how to how to go about trouble shooting a linux system when you first come from windows. There is extensive documentation on just about everything you can do on a linux system online, but for a brand new user, its not very helpful. You have to know what you want to do, how to look it up, and then what to do with that knowledge. In the long-run this will be a much more useful skill than knowing the [xrandr](https://www.x.org/releases/X11R7.5/doc/man/man1/xrandr.1.html)[^1] command is the correct one to swap your display settings. Next time, you (and I) won't have my blog post available with the perfect answer available[^2], so knowing the basics of how to problem solve in linux will be necessary. Hadley Wickham preaches having a [scientific mindset](https://adv-r.hadley.nz/introduction.html#meta-techniques) when doing data science; you should do the same when working in linux.
+I have two goals for this post. Nominally, it is about how to use Nvidia settings correctly on Ubuntu 20.04 and above, but the more important message I hope to convey is how to how to go about trouble shooting a linux system as a new user. There is extensive documentation online detailing just about everything you can do on a linux system online, but for a brand new user, its not very helpful. You have to know what you want to do, how to look it up, and then what to do with that knowledge. In the long-run this will be a much more useful skill than knowing the [xrandr](https://www.x.org/releases/X11R7.5/doc/man/man1/xrandr.1.html)[^1] command is the correct one to swap your display settings. Next time, you (and I) won't have my blog post available with the perfect answer available[^2], so knowing the basics of how to problem solve in linux will be necessary. Hadley Wickham preaches having a [scientific mindset](https://adv-r.hadley.nz/introduction.html#meta-techniques) when doing data science; you should do the same when working in linux.
 
 [^1]: Note: Since the first draft, I have found a different (possibly easier) way to solve this for Nvidia cards. The solution is linked [here](https://askubuntu.com/questions/379483/nvidia-x-server-settings-lost-on-every-reboot)
 
@@ -74,7 +74,7 @@ xrandr -q
 ## USB-C-0 disconnected (normal left inverted right x axis y axis)
 ```
 
-It looks confusing, but don't worry, there's only one bit of information we need from here: the monitor names.[^5] The monitor names are the strings on the left called DP-0 or HDMI-0. I have a lot of options, but only those two are connected. As you can see my HDMI-0 is the primary monitor, which is wrong. I want it to be DP-0. To switch it I run the following command.
+It looks confusing but don't worry, there's only one bit of information we need from here: the monitor names.[^5] The monitor names are the strings on the left called DP-0 or HDMI-0. I have a lot of monitor ports, but only those two are connected. As you can see my HDMI-0 is the primary monitor, which is wrong. I want it to be DP-0. To switch it I run the following command.
 
 [^5]: You can also use the following command to extract the names directly, but I find regular expressions a bit confusing, so I currently prefer to do it manually. xrandr | grep -e " connected"
 
@@ -147,7 +147,7 @@ cat monitor.txt
 ## xrandr --output DP-0 --primary
 ```
 
-Great! Now we have a text file[^8] containing our command, but its not executable yet, so it won't work. We have to work with linux file permissions^[I recommend chapter 9 of [this](https://nostarch.com/tlcl2) book for a good explanation of how the linux permissions system works if you are curious to learn more.] to make it work. I won't go in depth here, but the spark notes versions should be enough for out purposes here. 
+Great! Now we have a text file[^8] containing our command, but its not executable yet, so it won't work. We have to work with linux file permissions^[I recommend chapter 9 of [this](https://nostarch.com/tlcl2) book for a good explanation of how the linux permissions system works if you are curious to learn more.] to make it work. I won't go in depth here, but the spark notes versions should be enough for out purposes. 
 
 [^8]: Fun fact about linux, [file extensions](https://medium.com/@smohajer85/file-extensions-in-linux-c619690941c4) don't *usually* matter. We could have named our file monitor.png, and it would still work exactly the same except for in a few edge cases. It is good practice to give your file a logical extension name though to avoid confusion.
 
@@ -169,9 +169,9 @@ ls -lh
 ## -rwxrwxrwx 1 eander462 eander462 31 May 23 19:30 monitor.txt
 ```
 
-The permissions are the first thing shown in the second line after the ##. So, our fancy monitor.txt file has permissions -rw-rw-r--[^9]. Very impressive! To make it run, we are going to have to give execution permission to the file. We'll do that with the **[chmod](http://manpages.ubuntu.com/manpages/trusty/man1/chmod.1.html)** command. There are two ways of telling the command what permissions we want to give, but this is the spark notes version, so see one of the links in this paragraph for more information; all we need to know is that to give every type of user full permission, we use the following command. 
+The permissions are the first thing shown in the second line after the ##. So, our fancy monitor.txt file has permissions -rw-rw-r--[^9]. Very impressive! To make it run, we will have to give execution permission to the file. We'll do that with the **[chmod](http://manpages.ubuntu.com/manpages/trusty/man1/chmod.1.html)** command. There are two ways of telling the command what permissions we want to give, but this is the spark notes version, so see one of the links in this paragraph for more information; all we need to know is that to give every type of user full permission, we use the following command. 
 
-[^9]: Why are the rw's repeated three times? well it has to do with [user groups](https://www.redhat.com/sysadmin/manage-permissions). There are three levels of permissions, each can be uniquely given access to a combination of read, write and execute. This isn't important for our purposes here, since this is a harmless command, and we will just give everyone full permission
+[^9]: Why are the rw's repeated three times? Well it has to do with [user groups](https://www.redhat.com/sysadmin/manage-permissions). There are three levels of permissions, each can be uniquely given access to a combination of read, write and execute. This isn't important for our purposes here, since this is a harmless command, and we will just give everyone full permission
 
 ```bash
 # Reset the directory because knitting sets us to the project directory every time
@@ -192,7 +192,7 @@ ls -lh
 ## -rwxrwxrwx 1 eander462 eander462 31 May 23 19:30 monitor.txt
 ```
 
-And now we've successfully hacked (read done a simple, standard operation) linux. There's just one more step to get this bad boy running: we need to put it in our .bashrc file[^10], so it executes when we startup our terminal on first boot. 
+And now we've successfully hacked (read: done a simple, standard operation) linux. There's just one more step to get this bad boy running: we need to put it in our .bashrc file[^10], so it executes when we startup our terminal on first boot. 
 
 [^10]: Or .zshrc if you use zshell.
 
@@ -204,15 +204,15 @@ And now we've successfully hacked (read done a simple, standard operation) linux
 echo "monitor.txt" >> .bashrc
 ```
 
-And we're done! Now when you first run your terminal on startup, the monitor.txt program will run and set up your monitors correctly. This may have seemed like a lot, there we're really just three steps, and remembering how to get a script to run when you boot up your computer is a powerful tool, and will set you well on your way to be a cool linux hacker. 
+And we're done! Now when you first run your terminal on startup, the monitor.txt program will run and set up your monitors correctly. This may have seemed like a lot, but there we're really only three steps, and remembering how to get a script to run when you boot up your computer is a powerful tool, which will set you well on your way to be a cool linux hacker. 
 
 This isn't the end of the blog. It would be the end of most blogs, but I'm usually left with a feeling that blog writings just know how to do everything, and don't struggle to figure out the complex topics their blogs deal with. I don't want that to be the case here. I was entirely new to linux when I tried to make my monitors work correctly, and it took me three days to work out how to run the few basic steps I've described. In the rest of this post, I want to show you to process of troubleshooting and discovery of the solution. I hope it will be helpful in solving the next issue that comes up.
 
 ## But wait! How did you figure that out?
 
-How do we start out troubleshooting a problem? Well my first instinct was to call my dad and hope he already knew the solution, but he hates talking on the phone, so this solution probably won't work for you. *Annoying*. Guess we'll have to use that [scientific mindset](https://adv-r.hadley.nz/introduction.html#meta-techniques) I talked about earlier.[^11] This section is mostly going to be a narrative of my problem solving process. I learned about many new system features like cron while trying to work it out, so I hope that my learning will be helpful to you (and future me).
+How do we start out troubleshooting a problem? My first instinct was to call my dad and hope he already knew the solution, but he hates talking on the phone, so this solution probably won't work for you. *Annoying*. Guess we'll have to use that [scientific mindset](https://adv-r.hadley.nz/introduction.html#meta-techniques) I talked about earlier.[^11] This section is mostly going to be a narrative of my problem solving process. I learned about many new system features like cron while trying to work it out, so I hope that my learning will be helpful to you (and future me).
 
-[^11]: I've only been a linux user for half a year, but I'm already much better at problem solving then I was at the start. This troubleshooting walk through is going to be at a very basic level, but for a good reason; this tutorial is aimed at past me who spent three days trying to learn linux from scratch and not knowing the most basic of things. A few of the methods I show are going to look dumb, but that is how I learned, so I hope it will be a good resource.
+[^11]: I've only been a linux user for half a year, but I'm already much better at problem solving than I was at the start. This troubleshooting walk through is going to be at a very basic level, but for a good reason; this tutorial is aimed at past me who spent three days trying to learn linux from scratch and not knowing the most basic of things. A few of the methods I show are going to look dumb, but that is how I learned, so I hope it will be a good resource.
 
 The first step to science (at least computer science) is always to google it. When I google "change primary monitor ubuntu", I get [this](https://askubuntu.com/questions/300670/is-there-any-ability-to-set-my-primary-monitor). Confusingly for a new linux user, not one of the responses give the correct answer, or even mentions using the command line. Coming from windows where you never interact with the terminal, moving away from the safe [gui](https://en.wikipedia.org/wiki/Graphical_user_interface) toggle switches to the scary maroon maze of the command line is a hurdle. I'll save you my pain, but it took a few hours of googling and trying their solutions to learn that I was going to need to use the terminal. 
 
@@ -288,7 +288,7 @@ This brings us to the .bashrc solution I presented above. This works, but has do
 
 ## Conclusion
 
-Here we are at the end of our troubleshooting journey, and whirlwind tour of various linux features. You are now prepared to go out and be a hacker by delving into the depths of you linux OS. My hope is you take away from this blog that linux is complicated, especially for beginners, but the only way to solve your problems is to experiment. You're (probably) not going to hurt your computer, and even if you do its fairly easy to reload from a prior backup. Don't let the newness scare you, just give it a go and try it out! 
+Here we are at the end of our troubleshooting journey, and whirlwind tour of various linux features. You are now prepared to go out and be a hacker by delving into the depths of you linux OS. My hope is you take away from this blog that linux is complicated, especially for beginners. The only way to solve your problems is to experiment. You're (probably) not going to hurt your computer, and even if you do its fairly easy to reload from a prior backup. Don't let the novelty scare you, just give it a go and try it out! 
 
 
 
