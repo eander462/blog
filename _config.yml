@@ -69,6 +69,8 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/eander462"
+    - label: "University of Washington"
+      url: "https://econ.washington.edu/people/erik-andersen"
 
 
 defaults:
