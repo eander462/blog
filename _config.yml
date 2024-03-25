@@ -57,8 +57,8 @@ plugins:
 
 author:
   name   : "Erik Andersen"
-  avatar : "/assets/images/saphira.jpg"
-  bio    : "I am a first year Phd student in economics at the University of Washington."
+  avatar : "/assets/images/IMG_0335.jpeg"
+  bio    : "I am a PhD student in economics at the University of Washington interested in applied microeconomics especially related to environmental topics, and contract theory."
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
